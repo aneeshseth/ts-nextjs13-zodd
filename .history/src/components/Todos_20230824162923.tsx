@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import { UserParams, TodoParams } from '@/types'
 import axios from 'axios'
-import { useRouter } from 'next/navigation'
 
 
 
@@ -11,7 +10,6 @@ function Todos({user, todosList}: {user: UserParams, todosList: TodoParams[]}) {
   const [userL, setUserL] = useState<UserParams>({})
   const [todosL, setTodosL] = useState<TodoParams[]>([])
   const [newTodo, setNewTodo] = useState("")
-  const router = useRouter()
   useEffect(()=>{
     setUserL(user)
     setTodosL(todosList)
@@ -23,12 +21,11 @@ function Todos({user, todosList}: {user: UserParams, todosList: TodoParams[]}) {
     })
     const data = await res.data;
     setTodosL((prevTodos) => [...prevTodos, data.msg]);
-    router.refresh()
   } 
   return (
     <div>
         <div>Create Todo: </div>
-        <input placeholder='todo' value={newTodo} onChange={(e)=>setNewTodo(e.target.value)} style={{color: "black"}}/>
+        <input placeholder='todo' value={newTodo} onChange={(e)=>setNewTodo(e.target.value)}/>
         <button onClick={createTodo}>submit</button>
         <div>{user.username}: </div>
         {todosL.map((todo: TodoParams)=>(

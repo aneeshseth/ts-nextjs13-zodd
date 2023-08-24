@@ -37,6 +37,7 @@ export default async function TD() {
   const todos = await getTodos(user.msg)
   return (
     <>
+    <div style={{color: "white"}}>{user.msg.username}</div>
     <Todos user={user.msg} todosList={todos.msg}/>
     </>
   )

@@ -25,7 +25,7 @@ export type UserParams = z.infer<typeof userType>
 
 export const todoType = z.object({
     description: z.string(),
-    user: z.string()
+    id: z.string()
 })
 
 export type TodoParams = z.infer<typeof todoType>

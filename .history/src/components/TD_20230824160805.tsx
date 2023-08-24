@@ -2,7 +2,6 @@ import React from 'react'
 import {cookies} from 'next/headers'
 import Todos from './Todos'
 import { UserParams } from '@/types'
-import axios from 'axios'
 
 async function getUser() {
   try {
@@ -15,6 +14,7 @@ async function getUser() {
      cache: "no-store"
     })
     if (!res.ok) throw new Error("failed to fetch data")
+    console.log(res.json())
     return res.json();
   } catch (err) {
     console.log("hi error")
@@ -25,7 +25,7 @@ async function getTodos(user: UserParams) {
   const res = await fetch('http://localhost:3002/api/appl/getTodos', {
     method: "POST",
     body: JSON.stringify({
-      id: user?._id
+      id: user._id
     })
   })
   if (!res.ok) throw new Error("failed to fetch todos data")
@@ -34,10 +34,11 @@ async function getTodos(user: UserParams) {
 
 export default async function TD() {
   const user = await getUser()
-  const todos = await getTodos(user.msg)
+  const todos = await getTodos(user)
   return (
     <>
-    <Todos user={user.msg} todosList={todos.msg}/>
+    <div style={{color: "white"}}>{user.msg.username}</div>
+    <Todos user={user.msg}/>
     </>
   )
 }

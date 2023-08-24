@@ -25,7 +25,7 @@ async function getTodos(user: UserParams) {
   const res = await fetch('http://localhost:3002/api/appl/getTodos', {
     method: "POST",
     body: JSON.stringify({
-      id: user?._id
+      id: user._id
     })
   })
   if (!res.ok) throw new Error("failed to fetch todos data")
@@ -34,9 +34,10 @@ async function getTodos(user: UserParams) {
 
 export default async function TD() {
   const user = await getUser()
-  const todos = await getTodos(user.msg)
+  const todos = await getTodos(user)
   return (
     <>
+    <div style={{color: "white"}}>{user.msg.username}</div>
     <Todos user={user.msg} todosList={todos.msg}/>
     </>
   )

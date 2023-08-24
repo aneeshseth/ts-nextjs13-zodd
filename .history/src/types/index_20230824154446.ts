@@ -21,12 +21,11 @@ export const userType = z.object({
     _id: z.string()
 })
 
-export type UserParams = z.infer<typeof userType>
-
 export const todoType = z.object({
     description: z.string(),
-    user: z.string()
+    password: z.string()
 })
 
 export type TodoParams = z.infer<typeof todoType>
 
+export type UserParams = z.infer<typeof userType>
